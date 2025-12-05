@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ParticipantForm } from "@/components/ParticipantForm";
 import { ParticipantList } from "@/components/ParticipantList";
@@ -46,6 +46,7 @@ const Index = () => {
     useState<Participant | null>(null);
   const [showWinnerModal, setShowWinnerModal] = useState(false);
   const [showFullscreenWheel, setShowFullscreenWheel] = useState(false);
+  const hasCompletedRef = useRef(false);
 
   const handleStartRaffle = () => {
     if (participants.length === 0) {
@@ -55,6 +56,7 @@ const Index = () => {
 
     const winner = selectWinner();
     if (winner) {
+      hasCompletedRef.current = false;
       setTargetParticipant(winner);
       setShowFullscreenWheel(true);
       setIsSpinning(true);
@@ -62,6 +64,9 @@ const Index = () => {
   };
 
   const handleSpinComplete = () => {
+    if (hasCompletedRef.current) return;
+    hasCompletedRef.current = true;
+    
     setIsSpinning(false);
     setShowFullscreenWheel(false);
     if (targetParticipant) {
@@ -75,12 +80,14 @@ const Index = () => {
     setShowWinnerModal(false);
     clearCurrentWinner();
     setTargetParticipant(null);
+    hasCompletedRef.current = false;
   };
 
   const handleReset = () => {
     resetAll();
     setEditingParticipant(null);
     setTargetParticipant(null);
+    hasCompletedRef.current = false;
     toast.success("Raffle reset!");
   };
 
@@ -179,7 +186,7 @@ const Index = () => {
           <div className="flex flex-col items-center justify-start gap-6">
             <RouletteWheel
               participants={participants}
-              isSpinning={isSpinning}
+              isSpinning={isSpinning && !showFullscreenWheel}
               targetParticipant={targetParticipant}
               onSpinComplete={handleSpinComplete}
               onTick={playTick}
