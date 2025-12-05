@@ -5,6 +5,7 @@ import { ParticipantList } from "@/components/ParticipantList";
 import { RouletteWheel } from "@/components/RouletteWheel";
 import { RaffleHistory } from "@/components/RaffleHistory";
 import { WinnerModal } from "@/components/WinnerModal";
+import { FullscreenWheel } from "@/components/FullscreenWheel";
 import { useRaffle } from "@/hooks/useRaffle";
 import { useSound } from "@/hooks/useSound";
 import { Participant } from "@/types/participant";
@@ -44,6 +45,7 @@ const Index = () => {
   const [targetParticipant, setTargetParticipant] =
     useState<Participant | null>(null);
   const [showWinnerModal, setShowWinnerModal] = useState(false);
+  const [showFullscreenWheel, setShowFullscreenWheel] = useState(false);
 
   const handleStartRaffle = () => {
     if (participants.length === 0) {
@@ -54,12 +56,14 @@ const Index = () => {
     const winner = selectWinner();
     if (winner) {
       setTargetParticipant(winner);
+      setShowFullscreenWheel(true);
       setIsSpinning(true);
     }
   };
 
   const handleSpinComplete = () => {
     setIsSpinning(false);
+    setShowFullscreenWheel(false);
     if (targetParticipant) {
       executeRaffle(targetParticipant);
       setShowWinnerModal(true);
@@ -208,6 +212,17 @@ const Index = () => {
           </div>
         </div>
       </div>
+
+      {/* Fullscreen Wheel */}
+      <FullscreenWheel
+        isOpen={showFullscreenWheel}
+        participants={participants}
+        isSpinning={isSpinning}
+        targetParticipant={targetParticipant}
+        onSpinComplete={handleSpinComplete}
+        onTick={playTick}
+        onClose={() => setShowFullscreenWheel(false)}
+      />
 
       {/* Winner Modal */}
       <WinnerModal
