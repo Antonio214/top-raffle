@@ -31,31 +31,31 @@ export function ParticipantForm({
     const entriesNum = parseInt(entries, 10);
 
     if (!trimmedName) {
-      toast.error("Nome é obrigatório");
+      toast.error("Name is required");
       return;
     }
 
     if (isNaN(entriesNum) || entriesNum < 1) {
-      toast.error("Número de entradas deve ser pelo menos 1");
+      toast.error("Number of entries must be at least 1");
       return;
     }
 
     if (editingParticipant) {
       const success = onUpdate(editingParticipant.id, trimmedName, entriesNum);
       if (success) {
-        toast.success("Participante atualizado!");
+        toast.success("Participant updated!");
         onCancelEdit();
       } else {
-        toast.error("Já existe um participante com esse nome");
+        toast.error("A participant with this name already exists");
       }
     } else {
       const success = onAdd(trimmedName, entriesNum);
       if (success) {
-        toast.success("Participante adicionado!");
+        toast.success("Participant added!");
         setName("");
         setEntries("");
       } else {
-        toast.error("Já existe um participante com esse nome");
+        toast.error("A participant with this name already exists");
       }
     }
   };
@@ -75,20 +75,20 @@ export function ParticipantForm({
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
         <Label htmlFor="name" className="text-sm font-bold uppercase">
-          Nome do Participante
+          Participant Name
         </Label>
         <Input
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Ex: Guilherme"
+          placeholder="e.g. John"
           className="border-2 border-foreground shadow-xs"
         />
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="entries" className="text-sm font-bold uppercase">
-          Número de Entradas
+          Number of Entries
         </Label>
         <Input
           id="entries"
@@ -96,7 +96,7 @@ export function ParticipantForm({
           min="1"
           value={entries}
           onChange={(e) => setEntries(e.target.value)}
-          placeholder="Ex: 10"
+          placeholder="e.g. 10"
           className="border-2 border-foreground shadow-xs"
         />
       </div>
@@ -108,11 +108,11 @@ export function ParticipantForm({
         >
           {editingParticipant ? (
             <>
-              <Save className="w-4 h-4 mr-2" /> Salvar
+              <Save className="w-4 h-4 mr-2" /> Save
             </>
           ) : (
             <>
-              <Plus className="w-4 h-4 mr-2" /> Adicionar
+              <Plus className="w-4 h-4 mr-2" /> Add
             </>
           )}
         </Button>

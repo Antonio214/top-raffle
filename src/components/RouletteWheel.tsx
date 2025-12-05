@@ -61,7 +61,7 @@ export function RouletteWheel({
       ctx.font = "bold 14px 'Space Grotesk'";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText("Adicione participantes", center, center);
+      ctx.fillText("Add participants", center, center);
       return;
     }
 

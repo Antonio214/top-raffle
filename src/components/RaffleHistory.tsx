@@ -11,7 +11,7 @@ export function RaffleHistory({ winners }: RaffleHistoryProps) {
       <div className="border-2 border-dashed border-muted-foreground/30 p-6 text-center">
         <Trophy className="w-8 h-8 mx-auto text-muted-foreground/50 mb-2" />
         <p className="text-muted-foreground font-mono text-sm">
-          Nenhum sorteio realizado
+          No draws yet
         </p>
       </div>
     );
@@ -30,7 +30,7 @@ export function RaffleHistory({ winners }: RaffleHistoryProps) {
           <div className="flex-1">
             <p className="font-bold">{winner.participant.name}</p>
             <p className="text-xs text-muted-foreground font-mono">
-              {winner.participant.entries} entradas
+              {winner.participant.entries} entries
             </p>
           </div>
           <Trophy className="w-5 h-5 text-yellow-500" />
