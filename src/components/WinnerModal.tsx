@@ -24,27 +24,27 @@ export function WinnerModal({ winner, order, onClose }: WinnerModalProps) {
         <DialogHeader>
           <DialogTitle className="flex items-center justify-center gap-2 text-2xl">
             <PartyPopper className="w-6 h-6" />
-            Temos um Vencedor!
+            We Have a Winner!
             <PartyPopper className="w-6 h-6" />
           </DialogTitle>
           <DialogDescription className="sr-only">
-            Resultado do sorteio
+            Raffle result
           </DialogDescription>
         </DialogHeader>
 
         <div className="py-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-foreground text-background font-bold text-xl mb-4">
-            {order}º
+            #{order}
           </div>
           <h2 className="text-3xl font-bold mb-2">{winner.name}</h2>
           <p className="text-muted-foreground font-mono">
-            Com {winner.entries} entradas
+            With {winner.entries} entries
           </p>
         </div>
 
         <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
           <Sparkles className="w-4 h-4" />
-          <span>Parabéns ao sorteado!</span>
+          <span>Congratulations to the winner!</span>
           <Sparkles className="w-4 h-4" />
         </div>
 
@@ -52,7 +52,7 @@ export function WinnerModal({ winner, order, onClose }: WinnerModalProps) {
           onClick={onClose}
           className="w-full border-2 border-foreground shadow-sm hover:shadow-xs hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
         >
-          Continuar
+          Continue
         </Button>
       </DialogContent>
     </Dialog>

@@ -47,7 +47,7 @@ const Index = () => {
 
   const handleStartRaffle = () => {
     if (participants.length === 0) {
-      toast.error("Adicione pelo menos um participante");
+      toast.error("Add at least one participant");
       return;
     }
 
@@ -77,7 +77,7 @@ const Index = () => {
     resetAll();
     setEditingParticipant(null);
     setTargetParticipant(null);
-    toast.success("Sorteio reiniciado!");
+    toast.success("Raffle reset!");
   };
 
   // Update form when editing participant changes
@@ -98,10 +98,10 @@ const Index = () => {
         {/* Header */}
         <header className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-2 tracking-tight">
-            ROLETA DE SORTEIO
+            RAFFLE WHEEL
           </h1>
           <p className="text-muted-foreground font-mono">
-            Adicione participantes e gire a roleta!
+            Add participants and spin the wheel!
           </p>
         </header>
 
@@ -111,7 +111,7 @@ const Index = () => {
           <div className="space-y-6">
             <section className="border-2 border-foreground bg-card p-4 shadow-sm">
               <h2 className="text-lg font-bold mb-4 uppercase tracking-wide">
-                {editingParticipant ? "Editar Participante" : "Novo Participante"}
+                {editingParticipant ? "Edit Participant" : "New Participant"}
               </h2>
               <ParticipantForm
                 key={editingParticipant?.id ?? "new"}
@@ -125,7 +125,7 @@ const Index = () => {
             <section className="border-2 border-foreground bg-card p-4 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold uppercase tracking-wide">
-                  Participantes ({participants.length})
+                  Participants ({participants.length})
                 </h2>
                 {participants.length > 0 && (
                   <AlertDialog>
@@ -136,26 +136,26 @@ const Index = () => {
                         disabled={isSpinning}
                         className="border-2 border-foreground shadow-2xs hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px] transition-all"
                       >
-                        <RotateCcw className="w-3 h-3 mr-1" /> Resetar
+                        <RotateCcw className="w-3 h-3 mr-1" /> Reset
                       </Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent className="border-2 border-foreground shadow-md">
                       <AlertDialogHeader>
-                        <AlertDialogTitle>Resetar Sorteio</AlertDialogTitle>
+                        <AlertDialogTitle>Reset Raffle</AlertDialogTitle>
                         <AlertDialogDescription>
-                          Isso irá remover todos os participantes e limpar o
-                          histórico de sorteios. Deseja continuar?
+                          This will remove all participants and clear the
+                          raffle history. Do you want to continue?
                         </AlertDialogDescription>
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel className="border-2 border-foreground">
-                          Cancelar
+                          Cancel
                         </AlertDialogCancel>
                         <AlertDialogAction
                           onClick={handleReset}
                           className="bg-destructive text-destructive-foreground border-2 border-foreground"
                         >
-                          Resetar
+                          Reset
                         </AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
@@ -188,11 +188,11 @@ const Index = () => {
               className="w-full max-w-xs text-lg font-bold border-4 border-foreground shadow-md hover:shadow-sm hover:translate-x-[4px] hover:translate-y-[4px] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Dices className="w-5 h-5 mr-2" />
-              {isSpinning ? "GIRANDO..." : "SORTEAR"}
+              {isSpinning ? "SPINNING..." : "DRAW"}
             </Button>
 
             <p className="text-sm text-muted-foreground font-mono text-center">
-              Total de entradas:{" "}
+              Total entries:{" "}
               {participants.reduce((sum, p) => sum + p.entries, 0)}
             </p>
           </div>
@@ -201,7 +201,7 @@ const Index = () => {
           <div>
             <section className="border-2 border-foreground bg-card p-4 shadow-sm">
               <h2 className="text-lg font-bold mb-4 uppercase tracking-wide">
-                Histórico ({winners.length})
+                History ({winners.length})
               </h2>
               <RaffleHistory winners={winners} />
             </section>

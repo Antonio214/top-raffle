@@ -43,7 +43,7 @@ export function ParticipantList({
     return (
       <div className="border-2 border-dashed border-muted-foreground/30 p-8 text-center">
         <p className="text-muted-foreground font-mono text-sm">
-          Nenhum participante cadastrado
+          No participants registered
         </p>
       </div>
     );
@@ -68,7 +68,7 @@ export function ParticipantList({
             <div className="flex-1 min-w-0">
               <p className="font-bold truncate">{participant.name}</p>
               <p className="text-xs text-muted-foreground font-mono">
-                {participant.entries} entradas ({percentage}%)
+                {participant.entries} entries ({percentage}%)
               </p>
             </div>
             <div className="flex gap-1">
@@ -94,21 +94,21 @@ export function ParticipantList({
                 </AlertDialogTrigger>
                 <AlertDialogContent className="border-2 border-foreground shadow-md">
                   <AlertDialogHeader>
-                    <AlertDialogTitle>Remover Participante</AlertDialogTitle>
+                    <AlertDialogTitle>Remove Participant</AlertDialogTitle>
                     <AlertDialogDescription>
-                      Tem certeza que deseja remover{" "}
-                      <strong>{participant.name}</strong> do sorteio?
+                      Are you sure you want to remove{" "}
+                      <strong>{participant.name}</strong> from the raffle?
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel className="border-2 border-foreground">
-                      Cancelar
+                      Cancel
                     </AlertDialogCancel>
                     <AlertDialogAction
                       onClick={() => onRemove(participant.id)}
                       className="bg-destructive text-destructive-foreground border-2 border-foreground"
                     >
-                      Remover
+                      Remove
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
